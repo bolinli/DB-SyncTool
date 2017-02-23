@@ -3,6 +3,8 @@
  */
 package alchemystar.meta;
 
+import com.mysql.jdbc.StringUtils;
+
 /**
  * @Author lizhuyang
  */
@@ -42,6 +44,9 @@ public class Column {
     }
 
     public String getDefaultValue() {
+        if(StringUtils.isEmptyOrWhitespaceOnly(defaultValue)){
+            return "";
+        }
         return defaultValue;
     }
 
@@ -88,9 +93,10 @@ public class Column {
         if (defaultValue != null ? !defaultValue.equals(column.defaultValue) : column.defaultValue != null) {
             return false;
         }
-        if (comment != null ? !comment.equals(column.comment) : column.comment != null) {
+        // todo comment remove
+        /*if (comment != null ? !comment.equals(column.comment) : column.comment != null) {
             return false;
-        }
+        }*/
         return extra != null ? extra.equals(column.extra) : column.extra == null;
 
     }

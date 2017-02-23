@@ -156,9 +156,9 @@ public class CompareUnits {
                     sql += "add primary key ";
                 } else {
                     if (index.getNotUnique().equals("0")) {
-                        sql += "add unique ";
+                        sql += "add unique "+index.getIndexName()+" ";
                     } else {
-                        sql += "add index ";
+                        sql += "add index "+index.getIndexName()+" ";
                     }
                 }
                 sql += "(`";
