@@ -90,7 +90,7 @@ public class Syncer {
         target.setUser(targetUser);
         target.setPassword(targetPass);
         target.setSchema(targetSchema);
-        source.init();
+        target.init();
 
         CompareUnits units = new CompareUnits(source, target);
         units.compare();
