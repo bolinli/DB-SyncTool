@@ -88,7 +88,7 @@ public class Syncer {
         MetaData target = new MetaData();
         target.setJdbcUrl("jdbc:mysql://" + targetHost + "/" + targetSchema+"?characterEncoding="+targetCharset);
         target.setUser(targetUser);
-        target.setPassword(sourcePass);
+        target.setPassword(targetPass);
         target.setSchema(targetSchema);
         source.init();
 
