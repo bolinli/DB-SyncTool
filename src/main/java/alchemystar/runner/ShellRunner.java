@@ -7,8 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.alibaba.druid.util.StringUtils;
-
 /**
  * @Author lizhuyang
  */
@@ -19,7 +17,7 @@ public class ShellRunner {
     }
 
     public static Properties loadFromFile(String file) {
-        if (StringUtils.isEmpty(file)) {
+        if ("" == file) {
             throw new IllegalArgumentException("file parameter can't be blank.");
         }
         Properties p = new Properties();

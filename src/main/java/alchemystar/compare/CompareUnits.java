@@ -45,7 +45,7 @@ public class CompareUnits {
         for (Table table : source.getTables().values()) {
             if (target.getTables().get(table.getTableName()) == null) {
                 // 如果对应的target没有这张表,直接把create Table拿出
-                changeSql.add(table.getCreateTable()+";");
+                changeSql.add(table.getCreateTable() + ";");
                 continue;
             }
             // 这样就需要比较两者的字段
@@ -72,8 +72,13 @@ public class CompareUnits {
                 } else {
                     sql += "NULL ";
                 }
+                if (column.getCollate() != null) {
+                    sql += "COLLATE " + SqlUtil.getDbString(column.getCollate()) + " ";
+                }
                 if (column.getDefaultValue() != null) {
                     sql += "DEFAULT " + SqlUtil.getDbString(column.getDefaultValue()) + " ";
+                } else {
+                    sql += "DEFAULT NULL ";
                 }
                 if (column.getComment() != null) {
                     sql += "COMMENT " + SqlUtil.getDbString(column.getComment()) + " ";
@@ -81,7 +86,7 @@ public class CompareUnits {
                 if (after != null) {
                     sql += "after " + after;
                 }
-                changeSql.add(sql+";");
+                changeSql.add(sql + ";");
             } else {
                 // 检查对应的source 和 target的属性
                 String sql =
@@ -92,7 +97,7 @@ public class CompareUnits {
                 // 比较两者字段,如果返回null,表明一致
                 String sqlExtend = compareSingleColumn(sourceColumn, targetColumn);
                 if (sqlExtend != null) {
-                    changeSql.add(sql + sqlExtend+";");
+                    changeSql.add(sql + sqlExtend + ";");
                 }
             }
             after = column.getName();
@@ -104,13 +109,12 @@ public class CompareUnits {
                 // redundancy , so drop it
                 String sql = "alter table " + target.getSchema() + "." + targetTable.getTableName() + " drop " + column
                         .getName() + " ";
-                changeSql.add(sql+";");
+                changeSql.add(sql + ";");
             }
         }
     }
 
     private String compareSingleColumn(Column sourceColumn, Column targetColumn) {
-        List<String> modify = new ArrayList<String>();
         if (sourceColumn.equals(targetColumn)) {
             return null;
         }
@@ -126,11 +130,16 @@ public class CompareUnits {
         } else {
             changeSql += "NULL ";
         }
+        if (sourceColumn.getCollate() != null) {
+            changeSql += "COLLATE " + SqlUtil.getDbString(sourceColumn.getCollate()) + " ";
+        }
         if (sourceColumn.getExtra().toUpperCase().indexOf("AUTO_INCREMENT") != -1) {
             changeSql += "AUTO_INCREMENT ";
         }
         if (sourceColumn.getDefaultValue() != null) {
-            changeSql += "DEFAULT " + sourceColumn.getDefaultValue() + " ";
+            changeSql += "DEFAULT " + SqlUtil.getDbString(sourceColumn.getDefaultValue()) + " ";
+        } else {
+            changeSql += "DEFAULT NULL ";
         }
         if (sourceColumn.getComment() != null) {
             changeSql += "COMMENT " + SqlUtil.getDbString(sourceColumn.getComment()) + " ";
@@ -156,9 +165,9 @@ public class CompareUnits {
                     sql += "add primary key ";
                 } else {
                     if (index.getNotUnique().equals("0")) {
-                        sql += "add unique "+index.getIndexName()+" ";
+                        sql += "add unique " + index.getIndexName() + " ";
                     } else {
-                        sql += "add index "+index.getIndexName()+" ";
+                        sql += "add index " + index.getIndexName() + " ";
                     }
                 }
                 sql += "(`";
@@ -167,7 +176,7 @@ public class CompareUnits {
                 }
                 // 去掉最后一个,`
                 sql = sql.substring(0, sql.length() - 2) + ")";
-                changeSql.add(sql+";");
+                changeSql.add(sql + ";");
             }
         }
         for (Index index : targetTable.getIndexes().values()) {
@@ -179,7 +188,7 @@ public class CompareUnits {
                 } else {
                     sql += "drop index " + index.getIndexName();
                 }
-                changeSql.add(sql+";");
+                changeSql.add(sql + ";");
             }
         }
     }

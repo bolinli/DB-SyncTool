@@ -3,7 +3,6 @@
  */
 package alchemystar.meta;
 
-import com.mysql.jdbc.StringUtils;
 
 /**
  * @Author lizhuyang
@@ -18,6 +17,8 @@ public class Column {
     private String defaultValue;
     private String comment;
     private String extra;
+    // private String charset;
+    private String collate;
 
     public String getName() {
         return name;
@@ -44,9 +45,6 @@ public class Column {
     }
 
     public String getDefaultValue() {
-        if(StringUtils.isEmptyOrWhitespaceOnly(defaultValue)){
-            return "";
-        }
         return defaultValue;
     }
 
@@ -69,6 +67,15 @@ public class Column {
     public void setExtra(String extra) {
         this.extra = extra;
     }
+
+    public String getCollate() {
+        return collate;
+    }
+
+    public void setCollate(String collate) {
+        this.collate = collate;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -93,10 +100,15 @@ public class Column {
         if (defaultValue != null ? !defaultValue.equals(column.defaultValue) : column.defaultValue != null) {
             return false;
         }
-        // todo comment remove
-        /*if (comment != null ? !comment.equals(column.comment) : column.comment != null) {
+        if (comment != null ? !comment.equals(column.comment) : column.comment != null) {
             return false;
-        }*/
+        }
+//        if (charset != null ? !charset.equals(column.charset) : column.charset != null) {
+//            return false;
+//        }
+        if (collate != null ? !collate.equals(column.collate) : column.collate != null) {
+            return false;
+        }
         return extra != null ? extra.equals(column.extra) : column.extra == null;
 
     }
@@ -109,6 +121,8 @@ public class Column {
         result = 31 * result + (defaultValue != null ? defaultValue.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (extra != null ? extra.hashCode() : 0);
+//        result = 31 * result + (charset != null ? charset.hashCode() : 0);
+        result = 31 * result + (collate != null ? collate.hashCode() : 0);
         return result;
     }
 
@@ -121,6 +135,8 @@ public class Column {
                 ", defaultValue='" + defaultValue + '\'' +
                 ", comment='" + comment + '\'' +
                 ", extra='" + extra + '\'' +
+               // ", charset='" + charset + '\'' +
+                ", collate='" + collate + '\'' +
                 '}';
     }
 }

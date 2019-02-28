@@ -72,7 +72,7 @@ public class MetaData {
 
     private void getTableColumns(Table table) throws SQLException {
         ResultSet rs = SqlUtil.executeSql(conn, "select COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_DEFAULT,"
-                + "COLUMN_COMMENT,EXTRA from information_schema.columns where TABLE_SCHEMA=" + "'" + schema + "'"
+                + "COLUMN_COMMENT,EXTRA,CHARACTER_SET_NAME,COLLATION_NAME from information_schema.columns where TABLE_SCHEMA=" + "'" + schema + "'"
                 + " and "
                 + "TABLE_NAME=" + "'" + table.getTableName() + "'" + " order by ORDINAL_POSITION asc");
         while (rs.next()) {
@@ -83,6 +83,8 @@ public class MetaData {
             column.setIsNull(rs.getString("IS_NULLABLE"));
             column.setExtra(rs.getString("EXTRA"));
             column.setComment(rs.getString("COLUMN_COMMENT"));
+            // column.setCharset(rs.getString("CHARACTER_SET_NAME"));
+            column.setCollate(rs.getString("COLLATION_NAME"));
             table.getColumns().put(column.getName(), column);
         }
     }
