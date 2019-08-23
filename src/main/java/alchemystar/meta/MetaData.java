@@ -13,12 +13,14 @@ import java.util.Map;
 import com.alibaba.druid.util.JdbcUtils;
 
 import alchemystar.util.SqlUtil;
+import lombok.Data;
 
 /**
  * 当前Metadata不考虑分区键
  *
  * @Author lizhuyang
  */
+@Data
 public class MetaData {
 
     private Connection conn;
@@ -114,51 +116,4 @@ public class MetaData {
         }
     }
 
-    public String getJdbcUrl() {
-        return jdbcUrl;
-    }
-
-    public void setJdbcUrl(String jdbcUrl) {
-        this.jdbcUrl = jdbcUrl;
-    }
-
-    public String getSchema() {
-        return schema;
-    }
-
-    public void setSchema(String schema) {
-        this.schema = schema;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Connection getConn() {
-        return conn;
-    }
-
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
-
-    public Map<String, Table> getTables() {
-        return tables;
-    }
-
-    public void setTables(Map<String, Table> tables) {
-        this.tables = tables;
-    }
 }

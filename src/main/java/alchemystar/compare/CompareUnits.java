@@ -11,10 +11,12 @@ import alchemystar.meta.Index;
 import alchemystar.meta.MetaData;
 import alchemystar.meta.Table;
 import alchemystar.util.SqlUtil;
+import lombok.Data;
 
 /**
  * @Author lizhuyang
  */
+@Data
 public class CompareUnits {
 
     private MetaData source;
@@ -193,27 +195,4 @@ public class CompareUnits {
         }
     }
 
-    public MetaData getSource() {
-        return source;
-    }
-
-    public void setSource(MetaData source) {
-        this.source = source;
-    }
-
-    public MetaData getTarget() {
-        return target;
-    }
-
-    public void setTarget(MetaData target) {
-        this.target = target;
-    }
-
-    public List<String> getChangeSql() {
-        return changeSql;
-    }
-
-    public void setChangeSql(List<String> changeSql) {
-        this.changeSql = changeSql;
-    }
 }

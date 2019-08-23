@@ -4,9 +4,12 @@
 package alchemystar.meta;
 
 
+import lombok.Data;
+
 /**
  * @Author lizhuyang
  */
+@Data
 public class Column {
 
     //$sql = 'select COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_DEFAULT,COLUMN_COMMENT,EXTRA from information_schema.columns ';
@@ -19,63 +22,6 @@ public class Column {
     private String extra;
     // private String charset;
     private String collate;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getIsNull() {
-        return isNull;
-    }
-
-    public void setIsNull(String isNull) {
-        this.isNull = isNull;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
-    public String getCollate() {
-        return collate;
-    }
-
-    public void setCollate(String collate) {
-        this.collate = collate;
-    }
-
 
     @Override
     public boolean equals(Object o) {
