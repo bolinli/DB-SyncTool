@@ -14,7 +14,7 @@ import alchemystar.util.SqlUtil;
 import lombok.Data;
 
 /**
- * @Author lizhuyang
+ * @Author libolin
  */
 @Data
 public class CompareUnits {

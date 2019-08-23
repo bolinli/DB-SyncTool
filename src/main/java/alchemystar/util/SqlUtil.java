@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @Author lizhuyang
+ * @Author libolin
  */
 public class SqlUtil {
 

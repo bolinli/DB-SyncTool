@@ -7,7 +7,7 @@ package alchemystar.meta;
 import lombok.Data;
 
 /**
- * @Author lizhuyang
+ * @Author libolin
  */
 @Data
 public class Column {

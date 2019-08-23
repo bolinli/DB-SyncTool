@@ -17,7 +17,7 @@ import alchemystar.meta.MetaData;
 import alchemystar.util.SqlUtil;
 
 /**
- * @Author lizhuyang
+ * @Author libolin
  */
 public class Syncer {
 

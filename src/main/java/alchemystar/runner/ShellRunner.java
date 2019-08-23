@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @Author lizhuyang
+ * @Author libolin
  */
 public class ShellRunner {
     public static void main(String[] args) {
