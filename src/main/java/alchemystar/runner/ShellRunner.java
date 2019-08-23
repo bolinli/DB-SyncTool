@@ -17,7 +17,7 @@ public class ShellRunner {
     }
 
     public static Properties loadFromFile(String file) {
-        if ("" == file) {
+        if ("".equals(file) || file == null) {
             throw new IllegalArgumentException("file parameter can't be blank.");
         }
         Properties p = new Properties();

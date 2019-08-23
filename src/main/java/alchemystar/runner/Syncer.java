@@ -97,7 +97,7 @@ public class Syncer {
 
         for (int i = 0; i < units.getChangeSql().size(); i++) {
             System.out.println(units.getChangeSql().get(i));
-            if (autoExecute.equals("YES")) {
+            if ("YES".equals(autoExecute)) {
                 SqlUtil.ddl(target.getConn(), units.getChangeSql().get(i));
             }
         }

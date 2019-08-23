@@ -16,8 +16,7 @@ public class SqlUtil {
     public static ResultSet executeSql(Connection conn, String sql) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.setQueryTimeout(20);
-        ResultSet rs = stmt.executeQuery(sql);
-        return rs;
+        return stmt.executeQuery(sql);
     }
 
     public static void ddl(Connection conn, String sql) {

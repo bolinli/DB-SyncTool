@@ -69,7 +69,7 @@ public class CompareUnits {
                 String sql = "alter table " + target.getSchema() + "." + targetTable.getTableName() + " add " + column
                         .getName() + " ";
                 sql += column.getType() + " ";
-                if (column.getIsNull().equals("NO")) {
+                if ("NO".equals(column.getIsNull())) {
                     sql += "NOT NULL ";
                 } else {
                     sql += "NULL ";
@@ -94,10 +94,9 @@ public class CompareUnits {
                 String sql =
                         "alter table " + target.getSchema() + "." + targetTable.getTableName() + " change " + column
                                 .getName() + " ";
-                Column sourceColumn = column;
-                Column targetColumn = targetTable.getColumns().get(sourceColumn.getName());
+                Column targetColumn = targetTable.getColumns().get(column.getName());
                 // 比较两者字段,如果返回null,表明一致
-                String sqlExtend = compareSingleColumn(sourceColumn, targetColumn);
+                String sqlExtend = compareSingleColumn(column, targetColumn);
                 if (sqlExtend != null) {
                     changeSql.add(sql + sqlExtend + ";");
                 }
@@ -127,7 +126,7 @@ public class CompareUnits {
         }
         changeSql += sourceColumn.getName() + " ";
         changeSql += sourceColumn.getType() + " ";
-        if (sourceColumn.getIsNull().equals("NO")) {
+        if ("NO".equals(sourceColumn.getIsNull())) {
             changeSql += "NOT NULL ";
         } else {
             changeSql += "NULL ";
@@ -135,7 +134,7 @@ public class CompareUnits {
         if (sourceColumn.getCollate() != null) {
             changeSql += "COLLATE " + SqlUtil.getDbString(sourceColumn.getCollate()) + " ";
         }
-        if (sourceColumn.getExtra().toUpperCase().indexOf("AUTO_INCREMENT") != -1) {
+        if (sourceColumn.getExtra().toUpperCase().contains("AUTO_INCREMENT")) {
             changeSql += "AUTO_INCREMENT ";
         }
         if (sourceColumn.getDefaultValue() != null) {
@@ -161,23 +160,23 @@ public class CompareUnits {
 
     private void compareSingleKeys(Table sourceTable, Table targetTable) {
         for (Index index : sourceTable.getIndexes().values()) {
-            String sql = "alter table " + target.getSchema() + "." + targetTable.getTableName() + " ";
+            StringBuilder sql = new StringBuilder("alter table " + target.getSchema() + "." + targetTable.getTableName() + " ");
             if (targetTable.getIndexes().get(index.getIndexName()) == null) {
                 if (index.getIndexName().equals("PRIMARY")) {
-                    sql += "add primary key ";
+                    sql.append("add primary key ");
                 } else {
                     if (index.getNotUnique().equals("0")) {
-                        sql += "add unique " + index.getIndexName() + " ";
+                        sql.append("add unique ").append(index.getIndexName()).append(" ");
                     } else {
-                        sql += "add index " + index.getIndexName() + " ";
+                        sql.append("add index ").append(index.getIndexName()).append(" ");
                     }
                 }
-                sql += "(`";
+                sql.append("(`");
                 for (String key : index.getColumns()) {
-                    sql += key.trim() + "`,`";
+                    sql.append(key.trim()).append("`,`");
                 }
                 // 去掉最后一个,`
-                sql = sql.substring(0, sql.length() - 2) + ")";
+                sql = new StringBuilder(sql.substring(0, sql.length() - 2) + ")");
                 changeSql.add(sql + ";");
             }
         }
@@ -185,7 +184,7 @@ public class CompareUnits {
             if (sourceTable.getIndexes().get(index.getIndexName()) == null) {
                 // 表明此索引多余
                 String sql = "alter table " + target.getSchema() + "." + targetTable.getTableName() + " ";
-                if (index.getIndexName().equals("PRIMARY")) {
+                if ("PRIMARY".equals(index.getIndexName())) {
                     sql += "drop primary key ";
                 } else {
                     sql += "drop index " + index.getIndexName();
