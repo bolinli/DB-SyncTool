@@ -1,12 +1,9 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.meta;
+package com.meta;
 
+import lombok.Data;
+import java.util.Objects;
 
-/**
- * @Author lizhuyang
- */
+@Data
 public class Column {
 
     //$sql = 'select COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_DEFAULT,COLUMN_COMMENT,EXTRA from information_schema.columns ';
@@ -20,63 +17,6 @@ public class Column {
     // private String charset;
     private String collate;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getIsNull() {
-        return isNull;
-    }
-
-    public void setIsNull(String isNull) {
-        this.isNull = isNull;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
-    public String getCollate() {
-        return collate;
-    }
-
-    public void setCollate(String collate) {
-        this.collate = collate;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,28 +28,28 @@ public class Column {
 
         Column column = (Column) o;
 
-        if (name != null ? !name.equals(column.name) : column.name != null) {
+        if (!Objects.equals(name, column.name)) {
             return false;
         }
-        if (type != null ? !type.equals(column.type) : column.type != null) {
+        if (!Objects.equals(type, column.type)) {
             return false;
         }
-        if (isNull != null ? !isNull.equals(column.isNull) : column.isNull != null) {
+        if (!Objects.equals(isNull, column.isNull)) {
             return false;
         }
-        if (defaultValue != null ? !defaultValue.equals(column.defaultValue) : column.defaultValue != null) {
+        if (!Objects.equals(defaultValue, column.defaultValue)) {
             return false;
         }
-        if (comment != null ? !comment.equals(column.comment) : column.comment != null) {
+        if (!Objects.equals(comment, column.comment)) {
             return false;
         }
 //        if (charset != null ? !charset.equals(column.charset) : column.charset != null) {
 //            return false;
 //        }
-        if (collate != null ? !collate.equals(column.collate) : column.collate != null) {
+        if (!Objects.equals(collate, column.collate)) {
             return false;
         }
-        return extra != null ? extra.equals(column.extra) : column.extra == null;
+        return Objects.equals(extra, column.extra);
 
     }
 

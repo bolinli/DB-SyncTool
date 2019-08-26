@@ -1,8 +1,0 @@
-alchemystar/meta/Column.class
-alchemystar/util/SqlUtil.class
-alchemystar/meta/Table.class
-alchemystar/compare/CompareUnits.class
-alchemystar/runner/Syncer.class
-alchemystar/meta/Index.class
-alchemystar/runner/ShellRunner.class
-alchemystar/meta/MetaData.class

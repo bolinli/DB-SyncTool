@@ -1,19 +1,15 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.runner;
+package com.runner;
 
-import java.util.Properties;
-
+import com.compare.CompareUnits;
+import com.meta.MetaData;
+import com.util.SqlUtil;
 import com.mysql.jdbc.StringUtils;
 
-import alchemystar.compare.CompareUnits;
-import alchemystar.meta.MetaData;
-import alchemystar.util.SqlUtil;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Properties;
 
-/**
- * @Author lizhuyang
- */
 public class Syncer {
 
     public static void sync(Properties prop) {
@@ -79,14 +75,14 @@ public class Syncer {
         }
 
         MetaData source = new MetaData();
-        source.setJdbcUrl("jdbc:mysql://" + sourceHost + "/" + sourceSchema+"?characterEncoding="+sourceCharset);
+        source.setJdbcUrl("jdbc:mysql://" + sourceHost + "/" + sourceSchema + "?characterEncoding=" + sourceCharset);
         source.setUser(sourceUser);
         source.setPassword(sourcePass);
         source.setSchema(sourceSchema);
         source.init();
 
         MetaData target = new MetaData();
-        target.setJdbcUrl("jdbc:mysql://" + targetHost + "/" + targetSchema+"?characterEncoding="+targetCharset);
+        target.setJdbcUrl("jdbc:mysql://" + targetHost + "/" + targetSchema + "?characterEncoding=" + targetCharset);
         target.setUser(targetUser);
         target.setPassword(targetPass);
         target.setSchema(targetSchema);
@@ -95,10 +91,41 @@ public class Syncer {
         CompareUnits units = new CompareUnits(source, target);
         units.compare();
 
+        String path = "c:/software/" + sourceSchema + "_" + System.currentTimeMillis();
         for (int i = 0; i < units.getChangeSql().size(); i++) {
-            System.out.println(units.getChangeSql().get(i));
-            if (autoExecute.equals("YES")) {
-                SqlUtil.ddl(target.getConn(), units.getChangeSql().get(i));
+            String sql = units.getChangeSql().get(i);
+            System.out.println(sql);
+            appendFile(path,sql);
+            if ("YES".equals(autoExecute)) {
+                SqlUtil.ddl(target.getConn(), sql);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        String path = "c:/software/" + "dsf" + System.currentTimeMillis();
+        appendFile(path, "dfsd");
+        appendFile(path, "dfsd");
+        appendFile(path, "dfsd");
+        appendFile(path, "dfsd");
+    }
+
+    private static void appendFile(String path, String content) {
+        BufferedWriter bw = null;
+        try {
+            FileWriter file = new FileWriter(path, true);
+            bw = new BufferedWriter(file);
+            bw.append(content);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

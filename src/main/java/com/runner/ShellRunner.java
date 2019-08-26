@@ -1,15 +1,9 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.runner;
+package com.runner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * @Author lizhuyang
- */
 public class ShellRunner {
     public static void main(String[] args) {
         Properties properties = loadFromFile("./config.properties");
@@ -17,7 +11,7 @@ public class ShellRunner {
     }
 
     public static Properties loadFromFile(String file) {
-        if ("" == file) {
+        if ("".equals(file) || file == null) {
             throw new IllegalArgumentException("file parameter can't be blank.");
         }
         Properties p = new Properties();

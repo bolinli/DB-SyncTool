@@ -1,23 +1,16 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.util;
+package com.util;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * @Author lizhuyang
- */
 public class SqlUtil {
 
     public static ResultSet executeSql(Connection conn, String sql) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.setQueryTimeout(20);
-        ResultSet rs = stmt.executeQuery(sql);
-        return rs;
+        return stmt.executeQuery(sql);
     }
 
     public static void ddl(Connection conn, String sql) {
