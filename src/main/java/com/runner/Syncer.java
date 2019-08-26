@@ -1,24 +1,15 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.runner;
+package com.runner;
 
-import java.io.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Properties;
-
-import com.alibaba.druid.sql.dialect.oracle.ast.expr.OracleDateTimeUnit;
+import com.compare.CompareUnits;
+import com.meta.MetaData;
+import com.util.SqlUtil;
 import com.mysql.jdbc.StringUtils;
 
-import alchemystar.compare.CompareUnits;
-import alchemystar.meta.MetaData;
-import alchemystar.util.SqlUtil;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Properties;
 
-/**
- * @Author libolin
- */
 public class Syncer {
 
     public static void sync(Properties prop) {

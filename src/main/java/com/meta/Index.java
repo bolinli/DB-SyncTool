@@ -1,18 +1,10 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.meta;
+package com.meta;
 
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 索引信息
- *
- * @Author libolin
- */
 @Data
 public class Index {
 

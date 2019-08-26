@@ -1,16 +1,9 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.meta;
+package com.meta;
 
 import lombok.Data;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * @Author libolin
- */
 @Data
 public class Table {
     private String tableName;

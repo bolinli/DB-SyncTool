@@ -1,15 +1,9 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.runner;
+package com.runner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * @Author libolin
- */
 public class ShellRunner {
     public static void main(String[] args) {
         Properties properties = loadFromFile("./config.properties");

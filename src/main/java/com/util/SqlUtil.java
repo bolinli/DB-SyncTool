@@ -1,16 +1,10 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.util;
+package com.util;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * @Author libolin
- */
 public class SqlUtil {
 
     public static ResultSet executeSql(Connection conn, String sql) throws SQLException {

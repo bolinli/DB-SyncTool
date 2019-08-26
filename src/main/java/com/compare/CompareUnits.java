@@ -1,21 +1,14 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.compare;
+package com.compare;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import alchemystar.meta.Column;
-import alchemystar.meta.Index;
-import alchemystar.meta.MetaData;
-import alchemystar.meta.Table;
-import alchemystar.util.SqlUtil;
+import com.meta.Column;
+import com.meta.Index;
+import com.meta.MetaData;
+import com.meta.Table;
+import com.util.SqlUtil;
 import lombok.Data;
 
-/**
- * @Author libolin
- */
 @Data
 public class CompareUnits {
 

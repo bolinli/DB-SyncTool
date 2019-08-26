@@ -1,7 +1,4 @@
-/*
- * Copyright (C) 2016 alchemystar, Inc. All Rights Reserved.
- */
-package alchemystar.meta;
+package com.meta;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,13 +9,11 @@ import java.util.Map;
 
 import com.alibaba.druid.util.JdbcUtils;
 
-import alchemystar.util.SqlUtil;
+import com.util.SqlUtil;
 import lombok.Data;
 
 /**
  * 当前Metadata不考虑分区键
- *
- * @Author libolin
  */
 @Data
 public class MetaData {
